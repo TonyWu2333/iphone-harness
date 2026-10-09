@@ -209,7 +209,9 @@ def screenshot(path=None):
     UI tree's coordinates are in *logical points*. Don't use raw screenshot
     pixels for tap coordinates — call `window_size()` and divide.
     """
-    r = _send({"method": "screenshot", "params": {"path": path} if path else {}})["result"]
+    # The daemon writes the file, and its cwd is wherever it was first spawned,
+    # so resolve relative paths against the caller's cwd here.
+    r = _send({"method": "screenshot", "params": {"path": os.path.abspath(path)} if path else {}})["result"]
     return r["path"]
 
 

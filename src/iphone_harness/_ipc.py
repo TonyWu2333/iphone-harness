@@ -42,6 +42,7 @@ def _tmp_stem(name):
 
 
 def log_path(name):    return _TMP / f"{_tmp_stem(name)}.log"
+def shot_path(name):   return _TMP / f"{_tmp_stem(name)}-shot.png"
 def pid_path(name):    return _RUNTIME / f"{_runtime_stem(name)}.pid"
 def _sock_path(name):  return _RUNTIME / f"{_runtime_stem(name)}.sock"
 

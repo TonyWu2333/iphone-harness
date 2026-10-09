@@ -187,7 +187,9 @@ async def _m_appium(d, params):
 
 async def _m_screenshot(d, params):
     """Save a PNG screenshot to `path` (or a default tmp path). Returns path."""
-    path = params.get("path") or str(ipc._TMP / "iph-shot.png")
+    # Default is per-IPH_NAME so daemons driving different phones don't
+    # overwrite each other's screenshots.
+    path = params.get("path") or str(ipc.shot_path(NAME))
     png = await d._drive(d.driver.get_screenshot_as_png)
     with open(path, "wb") as f:
         f.write(png)

@@ -40,7 +40,7 @@ if m: tap_at_xy(m["cx_pt"], m["cy_pt"])
 
 ```python
 path, lines = annotated_screenshot()  # red boxes + numeric labels around each OCR line
-print(path)  # e.g. /tmp/iph-shot.annotated.png
+print(path)  # e.g. /tmp/iph-default-shot.annotated.png
 ```
 
 Pass this PNG + the `lines` list to a vision-capable LLM. The numbers in the image map to indices in `lines` — the model can say "tap box 7" and you do `lines[7]`.
