@@ -21,21 +21,7 @@ CORE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = CORE_DIR.parent.parent
 AGENT_WORKSPACE = Path(os.environ.get("IPH_AGENT_WORKSPACE", REPO_ROOT / "agent-workspace")).expanduser()
 
-
-def _load_env():
-    for p in (REPO_ROOT / ".env", AGENT_WORKSPACE / ".env"):
-        if not p.exists():
-            continue
-        for line in p.read_text().splitlines():
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
-
-
-_load_env()
-
+# .env files are loaded by the package __init__ (see _env.py).
 NAME = os.environ.get("IPH_NAME", "default")
 
 
